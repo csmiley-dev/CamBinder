@@ -1,0 +1,28 @@
+<Window x:Class="CamBinder.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CamBinder"
+        Width="140" Height="140"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!-- Placeholder colors only — swap for the real branded indicator/animation later. -->
+        <SolidColorBrush x:Key="WorkingBrush" Color="#4A90D9"/>
+        <SolidColorBrush x:Key="CompletingBrush" Color="#4CAF50"/>
+    </Window.Resources>
+    <Grid>
+        <Ellipse x:Name="Indicator"
+                 Width="72" Height="72"
+                 Fill="{StaticResource WorkingBrush}"
+                 RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <ScaleTransform x:Name="IndicatorScale" ScaleX="1" ScaleY="1"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+    </Grid>
+</Window>

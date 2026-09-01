@@ -1,0 +1,9 @@
+I want to make a windows program called CamBinder.
+
+I want this to be a program that can be installed on someone PC using an install file.
+The idea is to quickly and easily bind PDFs into 1 PDF. 
+I want it so that I can select a bunch of PDF files, and then right click on it, and in the right click context menu, I can click CamBind and it will automatically join all the PDFs together and within the same folder as where the PDFs are, it will create the binded output PDF file and call it M-Complete.pdf. It will add a number to the file name if the file already exists. 
+I want it to run really fast, and have minimal user interface, maybe some sort og graphic can appear on the screen during the binding process which changes colour a second before it completes. We can worry about this graphic at a later date, just use anything as a place holder as I might animate it down the track.
+I would like everything to be committed to a new github.
+I want you to make a memory file you can refer to.
+I want you to limit as much as possible the number of times I need to click yes in console while you are making changes.  
