@@ -8,12 +8,12 @@ namespace CamBinder.App;
 
 public partial class MainWindow : Window
 {
-    private readonly IReadOnlyList<string> _pdfPaths;
+    private readonly InstanceCoordinator _coordinator;
 
-    public MainWindow(IReadOnlyList<string> pdfPaths)
+    public MainWindow(InstanceCoordinator coordinator)
     {
         InitializeComponent();
-        _pdfPaths = pdfPaths;
+        _coordinator = coordinator;
         Loaded += MainWindow_Loaded;
     }
 
@@ -23,10 +23,11 @@ public partial class MainWindow : Window
 
         try
         {
-            var folder = Path.GetDirectoryName(_pdfPaths[0])!;
+            var pdfPaths = await _coordinator.WaitForCollectionAsync();
+            var folder = Path.GetDirectoryName(pdfPaths[0])!;
             var outputPath = OutputPathResolver.GetOutputPath(folder);
 
-            await Task.Run(() => PdfMerger.Merge(_pdfPaths, outputPath, onBeforeSave: () => Dispatcher.Invoke(ShowCompletingColor)));
+            await Task.Run(() => PdfMerger.Merge(pdfPaths, outputPath, onBeforeSave: () => Dispatcher.Invoke(ShowCompletingColor)));
 
             await Task.Delay(600);
         }
@@ -36,6 +37,7 @@ public partial class MainWindow : Window
         }
         finally
         {
+            _coordinator.Dispose();
             Close();
         }
     }

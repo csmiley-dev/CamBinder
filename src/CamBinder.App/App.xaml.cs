@@ -20,7 +20,15 @@ public partial class App : Application
             return;
         }
 
-        var window = new MainWindow(pdfPaths);
-        window.Show();
+        if (InstanceCoordinator.TryBecomePrimary(pdfPaths, out var coordinator))
+        {
+            var window = new MainWindow(coordinator!);
+            window.Show();
+        }
+        else
+        {
+            InstanceCoordinator.SendToPrimary(pdfPaths);
+            Shutdown();
+        }
     }
 }
