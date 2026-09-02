@@ -14,9 +14,16 @@ public static class PdfMerger
 
         foreach (var inputPath in inputPaths)
         {
-            using var input = PdfReader.Open(inputPath, PdfDocumentOpenMode.Import);
-            foreach (var page in input.Pages)
-                output.AddPage(page);
+            try
+            {
+                using var input = PdfReader.Open(inputPath, PdfDocumentOpenMode.Import);
+                foreach (var page in input.Pages)
+                    output.AddPage(page);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Could not read \"{Path.GetFileName(inputPath)}\": {ex.Message}", ex);
+            }
         }
 
         onBeforeSave?.Invoke();
