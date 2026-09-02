@@ -27,6 +27,6 @@ Source: "{#MyPublishDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdi
 
 [Registry]
 Root: HKCR; Subkey: "SystemFileAssociations\.pdf\shell\CamBind"; ValueType: string; ValueName: ""; ValueData: "Cambine"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.pdf\shell\CamBind"; ValueType: string; ValueName: "Icon"; ValueData: """{app}\{#MyAppExeName}"""
+Root: HKCR; Subkey: "SystemFileAssociations\.pdf\shell\CamBind"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\{#MyAppExeName},0"
 Root: HKCR; Subkey: "SystemFileAssociations\.pdf\shell\CamBind"; ValueType: string; ValueName: "MultiSelectModel"; ValueData: "Player"
 Root: HKCR; Subkey: "SystemFileAssociations\.pdf\shell\CamBind\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
