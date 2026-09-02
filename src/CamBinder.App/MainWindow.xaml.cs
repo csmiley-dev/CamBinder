@@ -23,7 +23,9 @@ public partial class MainWindow : Window
 
         try
         {
-            var pdfPaths = await _coordinator.WaitForCollectionAsync();
+            var pdfPaths = (await _coordinator.WaitForCollectionAsync())
+                .OrderBy(Path.GetFileName, NaturalFileNameComparer.Instance)
+                .ToList();
             var folder = Path.GetDirectoryName(pdfPaths[0])!;
             var outputPath = OutputPathResolver.GetOutputPath(folder);
 
