@@ -3,7 +3,7 @@
 A small Windows utility to quickly bind PDFs together. Select two or more PDF files in Explorer, right-click, and choose **Cambine** to merge them into a single `M-Complete.pdf` in the same folder (auto-numbered as `M-Complete (1).pdf`, etc. if that name is already taken).
 
 ## Solution layout
-- `src/CamBinder.Core` — merge logic (`PdfMerger`), output-naming logic (`OutputPathResolver`), and filename sort order (`NaturalFileNameComparer`), built on [PdfSharpCore](https://github.com/ststeiger/PdfSharpCore) (MIT-licensed fork of PDFsharp — used instead of the official PDFsharp package because it handles certain real-world PDFs, e.g. some CAD/drawing exports, that PDFsharp's stream-length parser rejects with "Cannot retrieve stream length").
+- `src/CamBinder.Core` — merge logic (`PdfMerger`), output-naming logic (`OutputPathResolver`), and filename sort order (`NaturalFileNameComparer`). `PdfMerger` tries [PdfSharpCore](https://github.com/ststeiger/PdfSharpCore) (MIT-licensed fork of PDFsharp) first, falling back to the official [PDFsharp](https://www.pdfsharp.net/) package for the whole batch if any file fails — real-world PDFs from CAD/drawing export pipelines have tripped up each engine on different files, so both are kept as complementary parsers rather than picking one.
 - `src/CamBinder.App` — the WPF app. Reads the selected PDF paths as command-line arguments, shows a minimal always-on-top indicator while merging, and exits automatically when done.
 - `installer/CamBinder.iss` — Inno Setup script that packages a self-contained build and registers the "Cambine" Explorer context menu entry for `.pdf` files.
 
